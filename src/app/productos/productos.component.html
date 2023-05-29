@@ -1,1 +1,77 @@
-<p>productos works!</p>
+
+productos.component.html:
+```html
+<h2>Listado de productos</h2>
+
+<div *ngIf="productos.length === 0">No hay productos disponibles.</div>
+
+<ul *ngIf="productos.length > 0">
+  <li *ngFor="let producto of productos">
+    Precio: {{ producto.precio }} <br>
+    ID: {{ producto._id }} <br>
+    Nombre: {{ producto.nombre }} <br>
+    Categoría: {{ producto.categoria.nombre }} <br>
+    Usuario: {{ producto.usuario.nombre }} <br>
+    <button (click)="loadProducto(producto)">Editar</button>
+    <button (click)="deleteProducto(producto._id)">Eliminar</button>
+  </li>
+</ul>
+
+<h2>Nuevo producto</h2>
+
+<div>
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="nombre" [(ngModel)]="nuevoProducto.nombre">
+</div>
+
+<div>
+  <label for="precio">Precio:</label>
+  <input type="number" id="precio" [(ngModel)]="nuevoProducto.precio">
+</div>
+
+<div>
+  <label for="categoria">Categoría:</label>
+  <select id="categoria" [(ngModel)]="nuevoProducto.categoria._id">
+    <option *ngFor="let categoria of categorias" [value]="categoria._id">{{ categoria.nombre }}</option>
+  </select>
+</div>
+
+<div>
+  <label for="usuario">Usuario:</label>
+  <select id="usuario" [(ngModel)]="nuevoProducto.usuario._id">
+    <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{ usuario.nombre }}</option>
+  </select>
+</div>
+
+<button (click)="createProducto(nuevoProducto)">Crear</button>
+
+<h2>Editar producto</h2>
+
+<div *ngIf="selectedProducto">
+  <div>
+    <label for="edit-nombre">Nombre:</label>
+    <input type="text" id="edit-nombre" [(ngModel)]="selectedProducto.nombre">
+  </div>
+
+  <div>
+    <label for="edit-precio">Precio:</label>
+    <input type="number" id="edit-precio" [(ngModel)]="selectedProducto.precio">
+  </div>
+
+  <div>
+    <label for="edit-categoria">Categoría:</label>
+    <select id="edit-categoria" [(ngModel)]="selectedProducto.categoria._id">
+      <option *ngFor="let categoria of categorias" [value]="categoria._id">{{ categoria.nombre }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="edit-usuario">Usuario:</label>
+    <select id="edit-usuario" [(ngModel)]="selectedProducto.usuario._id">
+      <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{ usuario.nombre }}</option>
+    </select>
+
+  </div>
+  <button (click)="updateProducto(selectedProducto)">Guardar</button>
+
+</div>

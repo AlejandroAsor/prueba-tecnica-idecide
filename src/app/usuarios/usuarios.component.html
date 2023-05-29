@@ -1,1 +1,45 @@
-<p>usuarios works!</p>
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nombre</th>
+    <th>Correo</th>
+    <th>Rol</th>
+    <th>Estado</th>
+    <th>Google</th>
+    <th>Acciones</th>
+  </tr>
+  <tr *ngFor="let usuario of usuarios">
+    <td>{{ usuario.uid }}</td>
+    <td>{{ usuario.nombre }}</td>
+    <td>{{ usuario.correo }}</td>
+    <td>{{ usuario.rol }}</td>
+    <td>{{ usuario.estado }}</td>
+    <td>{{ usuario.google }}</td>
+    <td>
+      <button (click)="deleteUser(usuario.uid)">Eliminar</button>
+      <button (click)="loadUser(usuario)">Editar</button>
+    </td>
+  </tr>
+</table>
+
+<div>
+  <h2>Crear Usuario</h2>
+  <input type="text" [(ngModel)]="newUser.nombre" placeholder="Nombre" />
+  <input type="email" [(ngModel)]="newUser.correo" placeholder="Correo" />
+  <input type="text" [(ngModel)]="newUser.rol" placeholder="Rol" />
+  <input type="checkbox" [(ngModel)]="newUser.estado" /> Estado
+  <input type="checkbox" [(ngModel)]="newUser.googleAux" (change)="updateGoogleValue($event)" /> Google
+  <input type="password" [(ngModel)]="newUser.password" placeholder="Contraseña" />
+  <button (click)="createUser(newUser)">Crear</button>
+</div>
+
+<div *ngIf="selectedUser">
+  <h2>Editar Usuario</h2>
+  <input type="text" [(ngModel)]="selectedUser.nombre" placeholder="Nombre" />
+  <input type="email" [(ngModel)]="selectedUser.correo" placeholder="Correo" />
+  <input type="text" [(ngModel)]="selectedUser.rol" placeholder="Rol" />
+  <input type="checkbox" [(ngModel)]="selectedUser.estado" /> Estado
+  <input type="checkbox" [(ngModel)]="selectedUser.googleAux" (change)="updateGoogleValue($event)" /> Google
+  <input type="password" [(ngModel)]="selectedUser.password" placeholder="Nueva Contraseña" />
+  <button (click)="updateUser(selectedUser)">Actualizar</button>
+</div>

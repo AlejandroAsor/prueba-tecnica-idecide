@@ -1,0 +1,24 @@
+<!-- buscar.component.html -->
+
+<div class="search-container">
+  <div class="input-group">
+    <select [(ngModel)]="searchCollection" class="form-control">
+      <option value="usuarios">Usuarios</option>
+      <option value="productos">Productos</option>
+      <option value="categorias">Categorías</option>
+    </select>
+
+    <input [(ngModel)]="searchTerm" class="form-control" placeholder="Buscar...">
+
+    <button (click)="search()" class="btn btn-primary">Buscar</button>
+  </div>
+
+  <div class="search-results">
+    <div *ngFor="let result of searchResults">
+      <!-- Aquí debes personalizar cómo se muestran los resultados de la búsqueda, dependiendo de cómo sean los objetos resultantes. -->
+      <div class="result">
+        {{ result | json }}
+      </div>
+    </div>
+  </div>
+</div>
