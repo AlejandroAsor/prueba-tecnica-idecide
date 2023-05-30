@@ -17,12 +17,12 @@
         </form>
         <!-- Mostrar información del usuario logueado -->
         <div *ngIf="isLoggedIn">
-          <h2>Bienvenido, {{ name }}</h2>
+          <h2>Bienvenido, {{ userData.results?.[0]?.nombre }}</h2>
           <h3>Tu información:</h3>
-          <p>Correo electrónico: {{ email }}</p>
-          <p>Rol: {{ registerRol }}</p>
-          <p>Estado: {{ registerEstado ? 'Activo' : 'Inactivo' }}</p>
-          <button class="btn btn-link" (click)="logout()">Cerrar sesión</button>
+          <p>Correo electrónico: {{ userData.results?.[0]?.correo }}</p>
+          <p>Rol: {{ userData.results?.[0]?.rol }}</p>
+          <p>Estado: {{ userData.results?.[0]?.estado ? 'Activo' : 'Inactivo' }}</p>
+          <button class="btn btn-danger" (click)="logout()">Cerrar sesión</button>
         </div>
       </div>
     </div>

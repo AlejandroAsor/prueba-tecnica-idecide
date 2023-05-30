@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   registerRol = '';
   registerEstado = false;
   registerGoogleAux = false;
+  userData: any = {};
 
   constructor(
     private router: Router,
@@ -31,9 +32,30 @@ export class LoginComponent implements OnInit {
     const token = this.authService.getToken();
     this.isLoggedIn = !!token;
 
+    // Verificar si se accedió directamente a la página de inicio de sesión
+    const isDirectAccess = !this.router.getCurrentNavigation()?.previousNavigation;
 
+    if (this.isLoggedIn && isDirectAccess) {
+      const email = localStorage.getItem('email');
+      if (email) {
+        this.apiService.search(email, 'usuarios', token).subscribe(
+          (response: any) => {
+            console.log('User data:', response);
+            this.userData = response;
+            // Actualizar la información del usuario basada en la respuesta
+            this.email = this.userData.correo;
+            this.name = this.userData.nombre;
+            this.registerRol = this.userData.rol;
+            this.registerEstado = this.userData.estado;
+            console.log('Updated user data:', this.userData);
+          },
+          (error: any) => {
+            console.error('Error fetching user data:', error);
+          }
+        );
+      }
+    }
   }
-
 
   register(): void {
     const user = {
@@ -48,8 +70,8 @@ export class LoginComponent implements OnInit {
     this.authService.register(user).subscribe(
       (response: any) => {
         console.log('LoginComponent register response:', response);
+        localStorage.setItem('email', user.correo);
 
-        // Realizar inicio de sesión automáticamente
         const credentials = { correo: this.registerEmail, password: this.registerPassword };
         this.apiService.login(credentials).subscribe(
           (loginResponse: any) => {
@@ -61,7 +83,7 @@ export class LoginComponent implements OnInit {
             } catch (error) {
               console.error('Error al autenticar y configurar el token:', error);
             }
-            this.router.navigate(['/inicio']); // Redirigir al inicio después del registro y login exitoso
+            this.router.navigate(['/inicio']);
           },
           (loginError: any) => {
             console.log('LoginComponent auto login error:', loginError);
@@ -70,11 +92,9 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log('LoginComponent register error:', error);
-        // Lógica después de un error de registro (por ejemplo, mostrar un mensaje de error)
       }
     );
   }
-
 
   login(): void {
     const credentials = { correo: this.email, password: this.password };
@@ -86,10 +106,10 @@ export class LoginComponent implements OnInit {
         try {
           this.authService.setAuthenticated(true);
           this.authService.setToken(response.token);
+          localStorage.setItem('email', credentials.correo);
         } catch (error) {
           console.error('Error al autenticar y configurar el token:', error);
         }
-        // Redirigir al inicio después de iniciar sesión
         this.router.navigate(['/inicio']);
       },
       (error: any) => {
@@ -109,6 +129,8 @@ export class LoginComponent implements OnInit {
     this.isLoggedIn = false;
     this.authService.setAuthenticated(false);
     this.authService.clearToken();
+    localStorage.removeItem('email');
     this.router.navigate(['/login']);
   }
 }
+

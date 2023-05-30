@@ -27,6 +27,10 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/usuarios`, user, { headers });
   }
 
+  getUserByToken(token: string) {
+    const headers = { 'Authorization': `Bearer ${token}` }; // Asume que se usa autenticación tipo Bearer
+    return this.http.get(`https://prueba-tecnica-idecide.azurewebsites.net/api/usuarios/${token}`, { headers });
+  }
 
 
   updateUser(user: any, token: string): Observable<any> {

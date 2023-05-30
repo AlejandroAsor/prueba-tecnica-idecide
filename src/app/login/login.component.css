@@ -1,3 +1,7 @@
+.container {
+  margin-top: 50px;
+}
+
 .login-container {
   background-color: #3c4b75;
   border-radius: 5px;
@@ -5,12 +9,13 @@
   width: 300px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   margin: 0 auto;
-  border: 1px solid #fff; /* Agregamos el borde */
+  border: 1px solid #fff;
 }
 
 .login-container h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #fff;
 }
 
 .form-group {
@@ -21,10 +26,12 @@
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
+  color: #fff;
 }
 
 .form-group input[type="email"],
-.form-group input[type="password"] {
+.form-group input[type="password"],
+.form-group input[type="text"] {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
@@ -50,4 +57,14 @@
   color: red;
   text-align: center;
   margin-bottom: 10px;
+}
+
+.btn-link {
+  color: #fff;
+  text-decoration: underline;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
 }
