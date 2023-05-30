@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../core/services/auth.service'; // Asegúrate de que esta ruta de importación sea correcta
+import { AuthService } from '../core/services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,8 +11,16 @@ export class HeaderComponent {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  get isLoggedIn(): boolean {
+    return this.authService.getIsAuthenticated();
+  }
+
+  get isLoginPage(): boolean {
+    return this.router.url != '/login';
+  }
+
   logout() {
-    this.authService.logout(); // Llama al método logout del servicio AuthService
-    this.router.navigate(['/login']); // Redirige al usuario a la página de inicio de sesión
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

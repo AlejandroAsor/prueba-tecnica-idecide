@@ -57,7 +57,9 @@ export class AuthService implements CanActivate {
       })
     );
   }
-
+  getIsAuthenticated(): boolean {
+    return this.isAuthenticated;
+  }
 
 
   logout(): void {
