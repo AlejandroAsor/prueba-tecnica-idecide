@@ -1,34 +1,33 @@
-<!-- categorias.component.html -->
+<div class="container mt-5">
+  <div class="categories-container">
+    <div class="table-responsive categories-list">
+      <h2>Listado de Categorías</h2>
+      <table class="table table-dark table-striped">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Acciones</th>
+        </tr>
+        <tr *ngFor="let categoria of categorias">
+          <td>{{ categoria._id }}</td>
+          <td>{{ categoria.nombre }}</td>
+          <td>
+            <div class="button-container">
+              <button class="btn btn-danger btn-sm btn-block mb-2 eliminar" (click)="deleteCategoria(categoria._id)">Eliminar</button>
+              <button class="btn btn-info btn-sm btn-block editar" (click)="loadCategoria(categoria)">Editar</button>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
 
-<h2>Listado de Categorías</h2>
-
-<div *ngIf="categorias.length === 0">No hay categorías disponibles.</div>
-
-<ul *ngIf="categorias.length > 0">
-  <li *ngFor="let categoria of categorias">
-    ID: {{ categoria._id }} <br>
-    Nombre: {{ categoria.nombre }} <br>
-    <button (click)="loadCategoria(categoria)">Editar</button>
-    <button (click)="deleteCategoria(categoria._id)">Eliminar</button>
-  </li>
-</ul>
-
-<h2>Nueva Categoría</h2>
-
-<div>
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="nombre" [(ngModel)]="nuevaCategoria.nombre">
-</div>
-
-<button (click)="createCategoria(nuevaCategoria)">Crear</button>
-
-<h2>Editar Categoría</h2>
-
-<div *ngIf="selectedCategoria">
-  <div>
-    <label for="edit-nombre">Nombre:</label>
-    <input type="text" id="edit-nombre" [(ngModel)]="selectedCategoria.nombre">
+    <div class="create-category">
+      <h2>Nueva Categoría</h2>
+      <div class="form-group input-container">
+        <label for="nombre">Nombre:</label>
+        <input class="form-control form-control-sm rounded text-center" id="nombre" type="text" [(ngModel)]="nuevaCategoria.nombre">
+      </div>
+      <button class="btn btn-primary" (click)="createCategoria(nuevaCategoria)">Crear</button>
+    </div>
   </div>
-
-  <button (click)="updateCategoria(selectedCategoria)">Guardar</button>
 </div>

@@ -21,10 +21,13 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/usuarios`, { headers });
   }
 
-  createUser(user: any, token: string): Observable<any> {
-    const headers = this.getAuthenticatedHeaders(token);
+  createUser(user: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    console.log('ApiService createUser:', user);
     return this.http.post(`${this.baseUrl}/usuarios`, user, { headers });
   }
+
+
 
   updateUser(user: any, token: string): Observable<any> {
     const headers = this.getAuthenticatedHeaders(token);

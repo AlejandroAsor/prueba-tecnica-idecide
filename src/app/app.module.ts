@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 // Importa AuthService
 import { AuthService } from './core/services/auth.service';
 import { BuscarComponent } from './buscar/buscar.component';
+import { HeaderComponent } from './header/header.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { BuscarComponent } from './buscar/buscar.component';
     CategoriasComponent,
     ProductosComponent,
     LoginComponent,
-    BuscarComponent
+    BuscarComponent,
+    HeaderComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

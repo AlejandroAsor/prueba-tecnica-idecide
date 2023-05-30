@@ -1,2 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+/* Estilo general */
+body {
+  background-color: #2a3042;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo del header */
+header {
+  background-color: #2d3b60;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+/* Estilo de la barra lateral */
+.sidebar {
+  background-color: #2d3b60;
+  height: calc(100vh - 60px);
+  width: 250px;
+  position: fixed;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px 20px;
+}
+
+.sidebar a:hover {
+  background-color: #3c4b75;
+}
+
+/* Contenido principal */
+.main {
+  margin-left: 250px;
+  padding: 20px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* Estilo de las tarjetas */
+.card {
+  background-color: #3c4b75;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+/* Texto dentro de las tarjetas */
+.card h2, .card p {
+  margin: 0 0 10px 0;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

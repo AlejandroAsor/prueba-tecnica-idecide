@@ -1,0 +1,15 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  /* el resto de tus estilos... */
+}
+
+.title {
+  margin: 0 auto;  /* centrar el título */
+}
+
+.logout-button {
+  margin-left: auto;  /* mover el botón de cierre de sesión a la derecha */
+}

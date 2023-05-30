@@ -1,45 +1,107 @@
-<table>
-  <tr>
-    <th>ID</th>
-    <th>Nombre</th>
-    <th>Correo</th>
-    <th>Rol</th>
-    <th>Estado</th>
-    <th>Google</th>
-    <th>Acciones</th>
-  </tr>
-  <tr *ngFor="let usuario of usuarios">
-    <td>{{ usuario.uid }}</td>
-    <td>{{ usuario.nombre }}</td>
-    <td>{{ usuario.correo }}</td>
-    <td>{{ usuario.rol }}</td>
-    <td>{{ usuario.estado }}</td>
-    <td>{{ usuario.google }}</td>
-    <td>
-      <button (click)="deleteUser(usuario.uid)">Eliminar</button>
-      <button (click)="loadUser(usuario)">Editar</button>
-    </td>
-  </tr>
-</table>
+<style>
+  .extra-padding-top {
+    padding-top: 50px;
+  }
+  @media (min-width: 768px) {
+    .custom-table {
+      max-width: 80%;
+      margin: auto;
+    }
+    .custom-form {
+      max-width: 70%;
+      margin: auto;
+    }
+  }
+</style>
 
-<div>
-  <h2>Crear Usuario</h2>
-  <input type="text" [(ngModel)]="newUser.nombre" placeholder="Nombre" />
-  <input type="email" [(ngModel)]="newUser.correo" placeholder="Correo" />
-  <input type="text" [(ngModel)]="newUser.rol" placeholder="Rol" />
-  <input type="checkbox" [(ngModel)]="newUser.estado" /> Estado
-  <input type="checkbox" [(ngModel)]="newUser.googleAux" (change)="updateGoogleValue($event)" /> Google
-  <input type="password" [(ngModel)]="newUser.password" placeholder="Contraseña" />
-  <button (click)="createUser(newUser)">Crear</button>
-</div>
 
-<div *ngIf="selectedUser">
-  <h2>Editar Usuario</h2>
-  <input type="text" [(ngModel)]="selectedUser.nombre" placeholder="Nombre" />
-  <input type="email" [(ngModel)]="selectedUser.correo" placeholder="Correo" />
-  <input type="text" [(ngModel)]="selectedUser.rol" placeholder="Rol" />
-  <input type="checkbox" [(ngModel)]="selectedUser.estado" /> Estado
-  <input type="checkbox" [(ngModel)]="selectedUser.googleAux" (change)="updateGoogleValue($event)" /> Google
-  <input type="password" [(ngModel)]="selectedUser.password" placeholder="Nueva Contraseña" />
-  <button (click)="updateUser(selectedUser)">Actualizar</button>
+<div class="container mt-5 extra-padding-top">
+  <div class="table-responsive usuarios-container rounded-3 py-3 mb-5 custom-table ">
+    <table class="table table-dark table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Correo</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Google</th>
+        <th>Acciones</th>
+      </tr>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.uid }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.correo }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>{{ usuario.estado }}</td>
+        <td>{{ usuario.google }}</td>
+        <td>
+          <div class="button-container">
+            <button class="btn btn-danger btn-sm btn-block mb-2 eliminar" (click)="deleteUser(usuario.uid)">Eliminar</button>
+            <button class="btn btn-info btn-sm btn-block editar" (click)="loadUser(usuario)">Editar</button>
+          </div>
+
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <div class="usuarios-container rounded-3 py-3 mb-4 custom-form create-form ">
+    <h2 class="text-center text-white">Crear Usuario</h2>
+    <div class="form-group input-container ">
+      <label for="nombre">Nombre</label>
+      <input class="form-control form-control-sm rounded text-center" id="nombre" type="text" [(ngModel)]="newUser.nombre" placeholder="Nombre" />
+    </div>
+    <div class="form-group input-container">
+      <label for="correo">Correo</label>
+      <input class="form-control form-control-sm rounded text-center" id="correo" type="email" [(ngModel)]="newUser.correo" placeholder="Correo" />
+    </div>
+    <div class="form-group input-container">
+      <label for="rol">Rol</label>
+      <input class="form-control form-control-sm rounded text-center" id="rol" type="text" [(ngModel)]="newUser.rol" placeholder="Rol" />
+    </div>
+    <div class="form-group input-container">
+      <label for="contraseña">Contraseña</label>
+      <input class="form-control form-control-sm rounded text-center" id="contraseña" type="password" [(ngModel)]="newUser.password" placeholder="Contraseña" />
+    </div>
+    <div class="form-group input-container">
+      <div class="form-group checkbox-container">
+        <input class="form-check-input" id="estadoCheck" type="checkbox" [(ngModel)]="newUser.estado" />
+        <label class="form-check-label text-white" for="estadoCheck">Estado</label>
+      </div>
+    </div>
+<!--    <div class="form-group">-->
+<!--      <div class="form-group checkbox-container">-->
+<!--        <input class="form-check-input" id="googleCheck" type="checkbox" [(ngModel)]="newUser.googleAux" (change)="updateGoogleValue($event)" />-->
+<!--        <label class="form-check-label text-white" for="googleCheck">Google</label>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="btn-container">
+      <button class="btn btn-primary" (click)="createUser(newUser)">Crear</button>
+    </div>
+  </div>
+
+  <div class="bg-secondary rounded-3 py-3 custom-form" *ngIf="selectedUser">
+    <h2 class="text-center text-white">Editar Usuario</h2>
+    <div class="form-group">
+      <label for="editNombre">Nombre</label>
+      <input class="form-control form-control-sm rounded text-center" id="editNombre" type="text" [(ngModel)]="selectedUser.nombre" placeholder="Nombre" />
+    </div>
+    <div class="form-group">
+      <label for="editCorreo">Correo</label>
+      <input class="form-control form-control-sm rounded text-center" id="editCorreo" type="email" [(ngModel)]="selectedUser.correo" placeholder="Correo" />
+    </div>
+    <div class="form-group">
+      <label for="editRol">Rol</label>
+      <input class="form-control form-control-sm rounded text-center" id="editRol" type="text" [(ngModel)]="selectedUser.rol" placeholder="Rol" />
+    </div>
+    <div class="form-group">
+      <label for="editContraseña">Nueva Contraseña</label>
+      <input class="form-control form-control-sm rounded text-center" id="editContraseña" type="password" [(ngModel)]="selectedUser.password" placeholder="Nueva Contraseña" />
+    </div>
+    <button class="btn btn-primary" (click)="updateUser(selectedUser)">Actualizar</button>
+  </div>
 </div>

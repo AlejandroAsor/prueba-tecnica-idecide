@@ -79,7 +79,7 @@ export class UsuariosComponent implements OnInit {
 
   createUser(user: any): void {
     const token = this.authService.getToken();
-    this.apiService.createUser(user, token).subscribe(
+    this.apiService.createUser(user).subscribe(
       (response: any) => {
         console.log(response);
         // Reset newUser after creation

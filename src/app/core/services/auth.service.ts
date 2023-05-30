@@ -58,9 +58,20 @@ export class AuthService implements CanActivate {
     );
   }
 
+
+
+  logout(): void {
+    this.clearToken();
+    this.setAuthenticated(false);
+  }
+
+  register(user: any): Observable<any> {
+    return this.apiService.createUser(user);
+  }
+
   private getCurrentUser(): any {
-    const userString = localStorage.getItem('user');
-    if (userString) {
+    const userString = localStorage.getItem('usuario');
+    if (userString && userString !== 'undefined') {
       return JSON.parse(userString);
     } else {
       return null;
@@ -71,4 +82,3 @@ export class AuthService implements CanActivate {
     return localStorage.getItem('token');
   }
 }
-

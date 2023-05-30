@@ -1,23 +1,56 @@
-<h2>Iniciar sesión</h2>
+<div class="container mt-5 extra-padding-top">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <div class="login-container">
+        <h2 *ngIf="!isLoggedIn">Iniciar sesión</h2>
+        <!-- Formulario de inicio de sesión -->
+        <form (ngSubmit)="login()" *ngIf="!isLoggedIn">
+          <div class="form-group">
+            <label for="email">Correo electrónico:</label>
+            <input type="email" id="email" name="email" required [(ngModel)]="email" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password" required [(ngModel)]="password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+        </form>
+        <!-- Mostrar información del usuario logueado -->
+        <div *ngIf="isLoggedIn">
+          <h2>Bienvenido, {{ name }}</h2>
+          <h3>Tu información:</h3>
+          <p>Correo electrónico: {{ email }}</p>
+          <p>Rol: {{ registerRol }}</p>
+          <p>Estado: {{ registerEstado ? 'Activo' : 'Inactivo' }}</p>
+          <button class="btn btn-link" (click)="logout()">Cerrar sesión</button>
+        </div>
+      </div>
+    </div>
 
-<!-- Muestra un mensaje de error si hay un error de inicio de sesión -->
-<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-<!-- Formulario de inicio de sesión -->
-<form (ngSubmit)="login()">
-  <div class="form-group">
-    <label for="email">Correo electrónico:</label>
-    <input type="email" id="email" name="email" required [(ngModel)]="email">
+    <div class="col-md-6 text-center" *ngIf="!isLoggedIn">
+      <div class="login-container">
+        <h2>Registro</h2>
+        <!-- Formulario de registro -->
+        <form (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="registerName">Nombre:</label>
+            <input type="text" id="registerName" name="registerName" required [(ngModel)]="registerName" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Correo electrónico:</label>
+            <input type="email" id="registerEmail" name="registerEmail" required [(ngModel)]="registerEmail" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Contraseña:</label>
+            <input type="password" id="registerPassword" name="registerPassword" required [(ngModel)]="registerPassword" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="registerRol">Rol:</label>
+            <input type="text" id="registerRol" name="registerRol" required [(ngModel)]="registerRol" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="password">Contraseña:</label>
-    <input type="password" id="password" name="password" required [(ngModel)]="password">
-  </div>
-  <button type="submit">Iniciar sesión</button>
-</form>
-
-<!-- Muestra un mensaje y el botón de cierre de sesión si la sesión está iniciada -->
-<div *ngIf="isLoggedIn">
-  <p>¡Sesión iniciada correctamente!</p>
-  <button (click)="logout()">Cerrar sesión</button>
 </div>

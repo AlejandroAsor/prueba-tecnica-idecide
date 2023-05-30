@@ -1,0 +1,126 @@
+.categories-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.categories-list,
+.create-category {
+  background-color: #3c4b75;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  width: 80%;
+  margin: 0 auto;
+}
+
+.categories-list h2,
+.create-category h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.categories-list table,
+.create-category table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.categories-list th,
+.categories-list td,
+.create-category th,
+.create-category td {
+  padding: 8px;
+  text-align: center;
+  border: 1px solid #fff;
+  color: #fff;
+  word-wrap: break-word;
+}
+
+.categories-list th,
+.create-category th {
+  background-color: #2d3b60;
+}
+
+.categories-list td button.eliminar,
+.create-category td button.eliminar {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  display: block;
+  width: 100%;
+}
+
+.categories-list td button.editar,
+.create-category td button.editar {
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  display: block;
+  width: 100%;
+}
+
+.categories-list td button.eliminar:hover,
+.create-category td button.eliminar:hover {
+  background-color: #c82333;
+}
+.categories-list td .button-container,
+.create-category .button-container {
+  background-color: transparent;
+}
+
+
+.categories-list td button.editar:hover,
+.create-category td button.editar:hover {
+  background-color: #0c63e4;
+}
+
+.create-category button {
+  background-color: #2d3b60;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.create-category button:hover {
+  background-color: #3c4b75;
+}
+
+.create-category label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.create-category input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.create-category .button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent;
+}
