@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
             } catch (error) {
               console.error('Error al autenticar y configurar el token:', error);
             }
-            this.router.navigate(['/inicio']);
+            this.router.navigate(['']);
           },
           (loginError: any) => {
             console.log('LoginComponent auto login error:', loginError);
@@ -110,7 +110,7 @@ export class LoginComponent implements OnInit {
         } catch (error) {
           console.error('Error al autenticar y configurar el token:', error);
         }
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['']);
       },
       (error: any) => {
         console.log('LoginComponent login error:', error);
