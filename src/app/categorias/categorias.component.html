@@ -1,14 +1,14 @@
 <div class="container mt-5">
   <div class="categories-container">
-    <div class="table-responsive categories-list">
-      <h2>Listado de Categorías</h2>
-      <table class="table table-dark table-striped">
+    <div *ngIf="!editing" class="table-responsive categories-list">
+      <h2 *ngIf="!editing">Listado de Categorías</h2>
+      <table *ngIf="!editing" class="table table-dark table-striped" >
         <tr>
           <th>ID</th>
           <th>Nombre</th>
           <th>Acciones</th>
         </tr>
-        <tr *ngFor="let categoria of categorias">
+        <tr *ngFor="let categoria of categorias" >
           <td>{{ categoria._id }}</td>
           <td>{{ categoria.nombre }}</td>
           <td>
@@ -20,8 +20,22 @@
         </tr>
       </table>
     </div>
+    <div class="edit-category" *ngIf="selectedCategoria">
+      <h2>Editar Categoría</h2>
+      <div class="form-group input-container">
+        <label for="edit-nombre">Nombre:</label>
+        <input class="form-control form-control-sm rounded text-center" id="edit-nombre" type="text" [(ngModel)]="selectedCategoria.nombre">
+      </div>
+      <div class="button-container">
+        <button class="btn btn-info btn-sm btn-block mb-2" (click)="updateCategoria(selectedCategoria)">Actualizar</button>
+        <button class="btn btn-danger btn-sm btn-block" (click)="cancelEditing()">Cancelar</button>
+      </div>
+    </div>
 
-    <div class="create-category">
+
+
+
+    <div class="create-category" *ngIf="!editing">
       <h2>Nueva Categoría</h2>
       <div class="form-group input-container">
         <label for="nombre">Nombre:</label>

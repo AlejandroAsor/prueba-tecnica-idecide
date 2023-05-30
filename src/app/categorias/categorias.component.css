@@ -124,3 +124,58 @@
   gap: 10px;
   background-color: transparent;
 }
+.edit-category {
+  background-color: #3c4b75;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  width: 80%;
+  margin: 0 auto;
+}
+
+.edit-category h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.edit-category label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.edit-category input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.edit-category button {
+  background-color: #2d3b60;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.edit-category button:hover {
+  background-color: #3c4b75;
+}
+.edit-category .button-container button.btn-info {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.edit-category .button-container button.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}

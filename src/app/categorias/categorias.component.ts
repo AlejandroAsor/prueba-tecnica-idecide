@@ -17,6 +17,7 @@ export class CategoriasComponent implements OnInit {
     nombre: ''
   };
   selectedCategoria: any = null;
+  editing: boolean = false; // Añade esta línea
 
   constructor(
     private apiService: ApiService,
@@ -80,6 +81,8 @@ export class CategoriasComponent implements OnInit {
       (response: any) => {
         console.log('Respuesta del servidor:', response);
         this.selectedCategoria = null;
+        this.editing = false; // Añade esta línea
+
         this.getCategories();
       },
       (error: any) => {
@@ -103,5 +106,11 @@ export class CategoriasComponent implements OnInit {
 
   loadCategoria(categoria: any): void {
     this.selectedCategoria = { ...categoria };
+    this.editing = true;
+
+  }
+  cancelEditing(): void {
+    this.selectedCategoria = null;
+    this.editing = false;
   }
 }
