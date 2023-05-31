@@ -9,6 +9,8 @@ import { HttpHeaders } from '@angular/common/http';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+  mostrarFormularioEdicion: boolean = false;
+
   usuarios: any[] = [];
   token: string = '';
   isAdmin: boolean = false;
@@ -71,8 +73,7 @@ export class UsuariosComponent implements OnInit {
 
   loadUser(usuario: any): void {
     this.selectedUser = { ...usuario };
-    this.selectedUser.googleAux = usuario.google || false;
-    console.log('Valor de googleAux:', this.selectedUser.googleAux);
+    this.mostrarFormularioEdicion = true;
   }
 
 
@@ -113,6 +114,7 @@ export class UsuariosComponent implements OnInit {
       (response: any) => {
         console.log(response);
         this.selectedUser = null;
+        this.mostrarFormularioEdicion = false;
         this.getUsers();
       },
       (error: any) => {
@@ -124,26 +126,11 @@ export class UsuariosComponent implements OnInit {
 
 
 
-  updateGoogleValue(event: any): void {
-    console.log("Valor de event:", event);
-    const target = event.target;
-    console.log("Valor de target:", target);
-    if (target) {
-      const value = target.checked;
-      console.log("Valor de checked:", value);
-      if (this.selectedUser) {
-        this.selectedUser.googleAux = value;
-        console.log("Valor de selectedUser.googleAux:", this.selectedUser.googleAux);
-      } else {
-        this.newUser.googleAux = value;
-        console.log("Valor de newUser.googleAux:", this.newUser.googleAux);
-      }
-      // Agregamos dos nuevos console.log para verificar el estado de selectedUser y newUser
-      console.log("Estado completo de selectedUser:", this.selectedUser);
-      console.log("Estado completo de newUser:", this.newUser);
-    }
-  }
 
+  cancelEditing() {
+    this.selectedUser = null;
+    this.mostrarFormularioEdicion = false;
+  }
 
 
 }

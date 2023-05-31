@@ -1,22 +1,10 @@
-<style>
-  .extra-padding-top {
-    padding-top: 50px;
-  }
-  @media (min-width: 768px) {
-    .custom-table {
-      max-width: 80%;
-      margin: auto;
-    }
-    .custom-form {
-      max-width: 70%;
-      margin: auto;
-    }
-  }
-</style>
+
 
 
 <div class="container mt-5 extra-padding-top">
-  <div class="table-responsive usuarios-container rounded-3 py-3 mb-5 custom-table ">
+  <div *ngIf="!mostrarFormularioEdicion" class="table-responsive usuarios-container rounded-3 py-3 mb-5 custom-table ">
+    <h2 class="text-center text-white centered-title">Lista de Usuarios</h2>
+
     <table class="table table-dark table-striped">
       <tr>
         <th>ID</th>
@@ -49,7 +37,7 @@
 
 
 
-  <div class="usuarios-container rounded-3 py-3 mb-4 custom-form create-form ">
+  <div *ngIf="!mostrarFormularioEdicion" class="usuarios-container rounded-3 py-3 mb-4 custom-form create-form ">
     <h2 class="text-center text-white">Crear Usuario</h2>
     <div class="form-group input-container ">
       <label for="nombre">Nombre</label>
@@ -68,10 +56,7 @@
       <input class="form-control form-control-sm rounded text-center" id="contraseña" type="password" [(ngModel)]="newUser.password" placeholder="Contraseña" />
     </div>
     <div class="form-group input-container">
-      <div class="form-group checkbox-container">
-        <input class="form-check-input" id="estadoCheck" type="checkbox" [(ngModel)]="newUser.estado" />
-        <label class="form-check-label text-white" for="estadoCheck">Estado</label>
-      </div>
+
     </div>
 <!--    <div class="form-group">-->
 <!--      <div class="form-group checkbox-container">-->
@@ -80,28 +65,47 @@
 <!--      </div>-->
 <!--    </div>-->
     <div class="btn-container">
-      <button class="btn btn-primary" (click)="createUser(newUser)">Crear</button>
+      <button class="btn btn-info btn-sm btn-block form-control" (click)="createUser(newUser)">Crear</button>
     </div>
   </div>
 
-  <div class="bg-secondary rounded-3 py-3 custom-form" *ngIf="selectedUser">
+  <div *ngIf="mostrarFormularioEdicion" class="edit-user bg-secondary rounded-3 py-3 custom-form">
     <h2 class="text-center text-white">Editar Usuario</h2>
-    <div class="form-group">
-      <label for="editNombre">Nombre</label>
-      <input class="form-control form-control-sm rounded text-center" id="editNombre" type="text" [(ngModel)]="selectedUser.nombre" placeholder="Nombre" />
+    <div class="form-group input-container">
+      <label for="editNombre">Nombre:</label>
+      <input class="form-control form-control-sm rounded text-center" id="editNombre" type="text" [(ngModel)]="selectedUser.nombre">
     </div>
-    <div class="form-group">
-      <label for="editCorreo">Correo</label>
-      <input class="form-control form-control-sm rounded text-center" id="editCorreo" type="email" [(ngModel)]="selectedUser.correo" placeholder="Correo" />
+    <div class="form-group input-container">
+      <label for="editCorreo">Correo:</label>
+      <input class="form-control form-control-sm rounded text-center" id="editCorreo" type="email" [(ngModel)]="selectedUser.correo">
     </div>
-    <div class="form-group">
-      <label for="editRol">Rol</label>
-      <input class="form-control form-control-sm rounded text-center" id="editRol" type="text" [(ngModel)]="selectedUser.rol" placeholder="Rol" />
+    <div class="form-group input-container">
+      <label for="editRol">Rol:</label>
+      <input class="form-control form-control-sm rounded text-center" id="editRol" type="text" [(ngModel)]="selectedUser.rol">
     </div>
-    <div class="form-group">
-      <label for="editContraseña">Nueva Contraseña</label>
-      <input class="form-control form-control-sm rounded text-center" id="editContraseña" type="password" [(ngModel)]="selectedUser.password" placeholder="Nueva Contraseña" />
+    <div class="form-group input-container">
+      <label for="editContraseña">Nueva Contraseña:</label>
+      <input class="form-control form-control-sm rounded text-center" id="editContraseña" type="password" [(ngModel)]="selectedUser.password">
     </div>
-    <button class="btn btn-primary" (click)="updateUser(selectedUser)">Actualizar</button>
+    <div class="button-container">
+      <button class="btn btn-info btn-sm btn-block" (click)="updateUser(selectedUser)">Actualizar</button>
+      <button class="btn btn-danger btn-sm btn-block" (click)="cancelEditing()">Cancelar</button>
+    </div>
   </div>
+
 </div>
+<style>
+  .extra-padding-top {
+    padding-top: 50px;
+  }
+  @media (min-width: 768px) {
+    .custom-table {
+      max-width: 80%;
+      margin: auto;
+    }
+    .custom-form {
+      max-width: 70%;
+      margin: auto;
+    }
+  }
+</style>

@@ -36,19 +36,19 @@ header {
   width: 80%;
 }
 
-.bg-secondary {
+.bg-secondary,
+.edit-user {
+  --bs-bg-opacity: 1;
   background-color: #3c4b75;
 }
-button.editar, button.eliminar {
+
+button.editar,
+button.eliminar {
   display: block;
   margin: auto;
   width: 100%;
 }
 
-.bg-secondary {
-  --bs-bg-opacity: 1;
-  background-color: #3c4b75;
-}
 button.btn-sm {
   padding: 3px 10px;
   font-size: 12px;
@@ -61,18 +61,19 @@ button.btn-sm {
   background-color: #3c4b75;
   border-radius: 5px;
   padding: 20px;
-  margin: 0 10px; /* Agregamos margen izquierdo y derecho de 10px */
+  margin: 0 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
+
 .table {
   margin: 0 10px;
-  width: calc(100% - 20px); /* Este cálculo toma en cuenta el margen que acabamos de agregar */
+  width: calc(100% - 20px);
   border-collapse: collapse;
 }
 
 .table-container {
-  margin: 0 100px; /* Agregado: margen izquierdo y derecho de 10px */
-  margin-bottom: 10px; /* Modificado: margen inferior de 10px */
+  margin: 0 100px;
+  margin-bottom: 10px;
 }
 
 table {
@@ -95,7 +96,7 @@ td {
 
 .usuarios-container {
   background-color: #3c4b75;
-  margin: 0 10px; /* Agregado: margen izquierdo y derecho de 10px */
+  margin: 0 10px;
 }
 
 button {
@@ -106,10 +107,9 @@ button {
   border-radius: 5px;
   cursor: pointer;
   margin-right: 10px;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
+button {
   background-color: #3c4b75;
 }
 
@@ -147,26 +147,25 @@ button:hover {
 .btn-info {
   padding: 5px 10px;
   font-size: 14px;
+  width: 100%;
 }
 
 .btn-primary {
   background-color: #2d3b60;
 }
+
 .btn-danger {
   background-color: rgba(206, 60, 60, 0.95);
 }
 
 .btn-info {
   background-color: #0c7cd5;
+  color: #fff; /* Agrega esta línea para mantener el color de la letra */
 }
 
 .btn-container {
   text-align: center;
   margin-top: 20px;
-}
-
-.btn-primary {
-  display: inline-block;
 }
 
 .custom-form.create-form {
@@ -191,13 +190,76 @@ button:hover {
   margin-top: 20px;
 }
 
-@media (min-width: 768px) {
-  .custom-table {
-    max-width: 80%;
-    margin: auto;
-  }
-  .custom-form {
-    max-width: 70%;
-    margin: auto;
-  }
+.edit-user {
+  background-color: #3c4b75 !important;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.edit-user h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.edit-user label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.edit-user input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.edit-user button {
+  background-color: #2d3b60;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.edit-user button {
+  background-color: #3c4b75;
+}
+
+.edit-user .button-container button.btn-info {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+.edit-user .button-container button.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+.btn-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.custom-form.create-form .btn-container {
+  text-align: center !important;
+  margin-top: 20px;
+}
+
+.custom-form.create-form .btn-container button {
+  width: 93%; /* Ajusta el valor del width según tus necesidades */
+  padding: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+  margin-left: auto;
+  margin-right: auto;
 }
