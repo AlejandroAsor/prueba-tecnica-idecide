@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../core/services/api.service';
 import { AuthService } from '../core/services/auth.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,6 +9,10 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UsuariosComponent implements OnInit {
   mostrarFormularioEdicion: boolean = false;
+  mostrarErrorCrear: boolean = false;
+  mostrarErrorActualizar: boolean = false;
+  erroresCrear: string[] = [];
+  erroresActualizar: string[] = [];
 
   usuarios: any[] = [];
   token: string = '';
@@ -18,7 +21,7 @@ export class UsuariosComponent implements OnInit {
     rol: 'ADMIN_ROLE',
     estado: true,
     google: false,
-    googleAux: false, // Variable auxiliar para el campo "Google"
+    googleAux: false,
     nombre: '',
     correo: '',
     password: ''
@@ -61,7 +64,6 @@ export class UsuariosComponent implements OnInit {
     this.apiService.deleteUser(userId, token).subscribe(
       (response: any) => {
         console.log(response);
-        // Actualizar la lista de usuarios después de eliminar uno
         this.getUsers();
       },
       (error: any) => {
@@ -69,68 +71,82 @@ export class UsuariosComponent implements OnInit {
       }
     );
   }
-
 
   loadUser(usuario: any): void {
     this.selectedUser = { ...usuario };
     this.mostrarFormularioEdicion = true;
   }
 
-
-
   createUser(user: any): void {
     const token = this.authService.getToken();
-    this.apiService.createUser(user).subscribe(
-      (response: any) => {
-        console.log(response);
-        // Reset newUser after creation
-        this.newUser = {
-          rol: 'ADMIN_ROLE',
-          estado: true,
-          google: false,
-          googleAux: false, // Restablecer el valor de googleAux
-          nombre: '',
-          correo: '',
-          password: ''
-        };
-        // Actualizar la lista de usuarios después de crear uno nuevo
-        this.getUsers();
-      },
-      (error: any) => {
-        console.error(error.error); // Imprime el mensaje de error devuelto por el servidor
-      }
-    );
+    if (user.nombre && user.correo && user.rol && user.password) {
+      this.apiService.createUser(user).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.newUser = {
+            rol: 'ADMIN_ROLE',
+            estado: true,
+            google: false,
+            googleAux: false,
+            nombre: '',
+            correo: '',
+            password: ''
+          };
+          this.getUsers();
+          this.mostrarErrorCrear = false;
+          this.erroresCrear = [];
+        },
+        (error: any) => {
+          console.error(error.error);
+          this.mostrarErrorCrear = true;
+          this.erroresCrear = Array.isArray(error.error.errors) ? error.error.errors.map((err: any) => err.msg) : [error.error];
+        }
+      );
+    } else {
+      console.error('Todos los campos obligatorios deben estar completos.');
+      this.mostrarErrorCrear = true;
+      this.erroresCrear = ['Todos los campos obligatorios deben estar completos.'];
+    }
   }
 
   updateUser(user: any): void {
     const token = this.authService.getToken();
-    const updatedUser = { ...user }; // Copia el usuario para evitar modificar directamente el objeto original
-    updatedUser.google = user.googleAux; // Actualiza el valor de "google" en la copia
-    delete updatedUser.googleAux; // Elimina la propiedad "googleAux" del objeto actualizado
+    if (user.nombre && user.correo && user.rol) {
+      const updatedUser = { ...user };
+      updatedUser.google = user.googleAux;
+      delete updatedUser.googleAux;
 
-    console.log('Actualizando usuario con los siguientes datos:', updatedUser); // Nuevo console.log
+      console.log('Actualizando usuario con los siguientes datos:', updatedUser);
 
-    this.apiService.updateUser(updatedUser, token).subscribe(
-      (response: any) => {
-        console.log(response);
-        this.selectedUser = null;
-        this.mostrarFormularioEdicion = false;
-        this.getUsers();
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
+      this.apiService.updateUser(updatedUser, token).subscribe(
+        (response: any) => {
+          console.log(response);
+          this.selectedUser = null;
+          this.mostrarFormularioEdicion = false;
+          this.getUsers();
+          this.mostrarErrorActualizar = false;
+          this.erroresActualizar = [];
+        },
+        (error: any) => {
+          console.error(error);
+          this.mostrarErrorActualizar = true;
+          this.erroresActualizar = Array.isArray(error.error) ? error.error : [error.error];
+        }
+      );
+    } else {
+      console.error('Todos los campos obligatorios deben estar completos.');
+      this.mostrarErrorActualizar = true;
+      this.erroresActualizar = ['Todos los campos obligatorios deben estar completos.'];
+    }
   }
-
-
-
-
 
   cancelEditing() {
     this.selectedUser = null;
     this.mostrarFormularioEdicion = false;
+    this.mostrarErrorCrear = false;
+    this.mostrarErrorActualizar = false;
+    this.erroresCrear = [];
+    this.erroresActualizar = [];
   }
-
-
 }
+

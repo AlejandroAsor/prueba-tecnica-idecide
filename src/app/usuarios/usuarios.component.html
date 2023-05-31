@@ -1,8 +1,5 @@
-
-
-
 <div class="container mt-5 extra-padding-top">
-  <div *ngIf="!mostrarFormularioEdicion" class="table-responsive usuarios-container rounded-3 py-3 mb-5 custom-table ">
+  <div *ngIf="!mostrarFormularioEdicion" class="table-responsive usuarios-container rounded-3 py-3 mb-5 custom-table">
     <h2 class="text-center text-white centered-title">Lista de Usuarios</h2>
 
     <table class="table table-dark table-striped">
@@ -27,19 +24,14 @@
             <button class="btn btn-danger btn-sm btn-block mb-2 eliminar" (click)="deleteUser(usuario.uid)">Eliminar</button>
             <button class="btn btn-info btn-sm btn-block editar" (click)="loadUser(usuario)">Editar</button>
           </div>
-
-
-
         </td>
       </tr>
     </table>
   </div>
 
-
-
-  <div *ngIf="!mostrarFormularioEdicion" class="usuarios-container rounded-3 py-3 mb-4 custom-form create-form ">
+  <div *ngIf="!mostrarFormularioEdicion" class="usuarios-container rounded-3 py-3 mb-4 custom-form create-form">
     <h2 class="text-center text-white">Crear Usuario</h2>
-    <div class="form-group input-container ">
+    <div class="form-group input-container">
       <label for="nombre">Nombre</label>
       <input class="form-control form-control-sm rounded text-center" id="nombre" type="text" [(ngModel)]="newUser.nombre" placeholder="Nombre" />
     </div>
@@ -48,24 +40,13 @@
       <input class="form-control form-control-sm rounded text-center" id="correo" type="email" [(ngModel)]="newUser.correo" placeholder="Correo" />
     </div>
     <div class="form-group input-container">
-      <label for="rol">Rol</label>
-      <input class="form-control form-control-sm rounded text-center" id="rol" type="text" [(ngModel)]="newUser.rol" placeholder="Rol" />
-    </div>
-    <div class="form-group input-container">
       <label for="contraseña">Contraseña</label>
       <input class="form-control form-control-sm rounded text-center" id="contraseña" type="password" [(ngModel)]="newUser.password" placeholder="Contraseña" />
     </div>
-    <div class="form-group input-container">
-
-    </div>
-<!--    <div class="form-group">-->
-<!--      <div class="form-group checkbox-container">-->
-<!--        <input class="form-check-input" id="googleCheck" type="checkbox" [(ngModel)]="newUser.googleAux" (change)="updateGoogleValue($event)" />-->
-<!--        <label class="form-check-label text-white" for="googleCheck">Google</label>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="btn-container">
       <button class="btn btn-info btn-sm btn-block form-control" (click)="createUser(newUser)">Crear</button>
+      <!-- Mostrar mensajes de error de creación -->
+      <div *ngFor="let error of erroresCrear" class="error-message">{{ error }}</div>
     </div>
   </div>
 
@@ -91,8 +72,9 @@
       <button class="btn btn-info btn-sm btn-block" (click)="updateUser(selectedUser)">Actualizar</button>
       <button class="btn btn-danger btn-sm btn-block" (click)="cancelEditing()">Cancelar</button>
     </div>
+    <!-- Mostrar mensajes de error de actualización -->
+    <div *ngFor="let error of erroresActualizar" class="error-message">{{ error }}</div>
   </div>
-
 </div>
 <style>
   .extra-padding-top {
@@ -108,4 +90,10 @@
       margin: auto;
     }
   }
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
 </style>
+
