@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   registerEmail = '';
   registerPassword = '';
   registerName = '';
-  registerRol = '';
+  registerRol = 'ADMIN_ROLE';
   registerEstado = false;
   registerGoogleAux = false;
   userData: any = {};
@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           },
           (error: any) => {
             console.error('Error fetching user data:', error);
+
           }
         );
       }
@@ -92,6 +93,8 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log('LoginComponent register error:', error);
+        alert('Error al registrarse: Verifica tus datos');
+
       }
     );
   }
@@ -114,6 +117,8 @@ export class LoginComponent implements OnInit {
       },
       (error: any) => {
         console.log('LoginComponent login error:', error);
+        alert('Error al iniciar sesión: Verifica tus datos');
+
         this.isLoggedIn = false;
         try {
           this.authService.setAuthenticated(false);
@@ -121,6 +126,7 @@ export class LoginComponent implements OnInit {
           console.error('Error al desautenticar:', error);
         }
         this.errorMessage = 'Credenciales inválidas. Inténtalo de nuevo.';
+
       }
     );
   }

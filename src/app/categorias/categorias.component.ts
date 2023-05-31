@@ -61,6 +61,8 @@ export class CategoriasComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al crear la categoría:', error);
+        alert('Error al crear nueva categoría: Verifica tus datos');
+
       }
     );
   }
@@ -87,6 +89,8 @@ export class CategoriasComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al actualizar la categoría:', error);
+        alert('Error al actualizar la categoría: Verifica tus datos');
+
       }
     );
   }

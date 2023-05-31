@@ -110,6 +110,8 @@ export class ProductosComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al crear el producto:', error);
+        alert('Error al crear un nuevo producto: Verifica tus datos');
+
       }
     );
   }
@@ -137,6 +139,8 @@ export class ProductosComponent implements OnInit {
       },
       (error: any) => {
         console.error('Error al actualizar el producto:', error);
+        alert('Error al actualizar el producto: Verifica tus datos');
+
       }
     );
   }
