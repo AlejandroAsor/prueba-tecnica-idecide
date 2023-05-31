@@ -21,6 +21,8 @@ export class BuscarComponent implements OnInit {
   }
 
   search(): void {
+    this.searchResults = []; // Reiniciar los resultados antes de realizar una nueva búsqueda
+
     this.apiService.search(this.searchTerm, this.searchCollection, this.token).subscribe(
       data => {
         console.log(data);  // Imprimir la respuesta de la API
@@ -32,8 +34,25 @@ export class BuscarComponent implements OnInit {
     );
   }
 
+  getTableColumns(): string[] {
+    if (this.searchCollection === 'usuarios') {
+      return ['Rol', 'Estado', 'Google', 'Nombre', 'Correo', 'UID'];
+    } else if (this.searchCollection === 'productos') {
+      return ['Precio', 'Nombre', 'Categoría', 'Usuario'];
+    } else if (this.searchCollection === 'categorias') {
+      return ['ID', 'Nombre', 'ID Usuario'];
+    }
+    return [];
+  }
+  onSearchCollectionChange(value: string): void {
+    this.searchCollection = value;
+    this.searchResults = []; // Reiniciar los resultados al cambiar la selección
+  }
+
 
 
   ngOnInit(): void {
+    this.searchCollection = ''; // No establecer ningún valor inicialmente
   }
+
 }

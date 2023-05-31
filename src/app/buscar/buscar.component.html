@@ -1,24 +1,55 @@
-<!-- buscar.component.html -->
-
 <div class="search-container">
   <div class="input-group">
-    <select [(ngModel)]="searchCollection" class="form-control">
+    <select [(ngModel)]="searchCollection" (ngModelChange)="onSearchCollectionChange($event)" class="form-control">
       <option value="usuarios">Usuarios</option>
       <option value="productos">Productos</option>
       <option value="categorias">Categorías</option>
     </select>
 
+
+
     <input [(ngModel)]="searchTerm" class="form-control" placeholder="Buscar...">
 
     <button (click)="search()" class="btn btn-primary">Buscar</button>
   </div>
+</div>
 
-  <div class="search-results">
-    <div *ngFor="let result of searchResults">
-      <!-- Aquí debes personalizar cómo se muestran los resultados de la búsqueda, dependiendo de cómo sean los objetos resultantes. -->
-      <div class="result">
-        {{ result | json }}
-      </div>
-    </div>
-  </div>
+<div class="results-container" *ngIf="searchResults.length > 0">
+  <table class="table">
+    <thead>
+    <tr>
+      <th *ngFor="let column of getTableColumns()">{{ column }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngIf="searchCollection === 'usuarios'">
+      <tr *ngFor="let item of searchResults">
+        <td>{{ item.rol }}</td>
+        <td>{{ item.estado }}</td>
+        <td>{{ item.google }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.correo }}</td>
+        <td>{{ item.uid }}</td>
+      </tr>
+    </ng-container>
+
+    <ng-container *ngIf="searchCollection === 'productos'">
+      <tr *ngFor="let item of searchResults">
+        <td>{{ item.precio }}</td>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.categoria?.nombre }}</td> <!-- Mostrar el nombre de la categoría -->
+        <td>{{ item.usuario }}</td> <!-- Mostrar el ID del usuario -->
+      </tr>
+    </ng-container>
+    <ng-container *ngIf="searchCollection === 'categorias'">
+      <tr *ngFor="let item of searchResults">
+        <td>{{ item._id }}</td> <!-- Agregamos el campo _id -->
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.usuario }}</td> <!-- Agregamos el campo usuario como ID Usuario -->
+      </tr>
+    </ng-container>
+
+    </tbody>
+  </table>
+
 </div>
