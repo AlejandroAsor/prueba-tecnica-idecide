@@ -10,7 +10,8 @@
 }
 
 .products-list,
-.create-product {
+.create-product,
+.edit-product {
   background-color: #3c4b75;
   border-radius: 5px;
   padding: 20px;
@@ -20,14 +21,16 @@
 }
 
 .products-list h2,
-.create-product h2 {
+.create-product h2,
+.edit-product h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #fff;
 }
 
 .products-list table,
-.create-product table {
+.create-product table,
+.edit-product table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
@@ -36,7 +39,9 @@
 .products-list th,
 .products-list td,
 .create-product th,
-.create-product td {
+.create-product td,
+.edit-product th,
+.edit-product td {
   padding: 8px;
   text-align: center;
   border: 1px solid #fff;
@@ -45,12 +50,14 @@
 }
 
 .products-list th,
-.create-product th {
+.create-product th,
+.edit-product th {
   background-color: #2d3b60;
 }
 
 .products-list td button.eliminar,
-.create-product td button.eliminar {
+.create-product td button.eliminar,
+.edit-product td button.eliminar {
   background-color: #dc3545;
   color: #fff;
   padding: 8px 12px;
@@ -63,7 +70,8 @@
 }
 
 .products-list td button.editar,
-.create-product td button.editar {
+.create-product td button.editar,
+.edit-product td button.editar {
   background-color: #0d6efd;
   color: #fff;
   padding: 8px 12px;
@@ -76,21 +84,25 @@
 }
 
 .products-list td button.eliminar:hover,
-.create-product td button.eliminar:hover {
+.create-product td button.eliminar:hover,
+.edit-product td button.eliminar:hover {
   background-color: #c82333;
 }
 
 .products-list td .button-container,
-.create-product .button-container {
+.create-product .button-container,
+.edit-product .button-container {
   background-color: transparent;
 }
 
 .products-list td button.editar:hover,
-.create-product td button.editar:hover {
+.create-product td button.editar:hover,
+.edit-product td button.editar:hover {
   background-color: #0c63e4;
 }
 
-.create-product button {
+.create-product button,
+.edit-product button {
   background-color: #2d3b60;
   color: #fff;
   padding: 8px 12px;
@@ -101,28 +113,38 @@
   margin-top: 10px;
 }
 
-.create-product button:hover {
+.create-product button:hover,
+.edit-product button:hover {
   background-color: #3c4b75;
 }
 
-.create-product label {
+.create-product label,
+.edit-product label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
   color: #fff;
+  text-align: center;
 }
 
-.create-product input[type="text"] {
+.create-product input[type="text"],
+.create-product input[type="number"],
+.create-product select,
+.edit-product input[type="text"],
+.edit-product input[type="number"],
+.edit-product select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
   border: none;
   border-radius: 5px;
   margin-bottom: 10px;
+
   text-align: center;
 }
 
-.create-product .button-container {
+.create-product .button-container,
+.edit-product .button-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -131,7 +153,53 @@
 
 @media (max-width: 768px) {
   .products-list table,
-  .create-product table {
+  .create-product table,
+  .edit-product table {
     font-size: 14px;
   }
 }
+
+@media (max-width: 576px) {
+  .products-container {
+    width: 90%;
+  }
+}
+
+.edit-product input[type="text"],
+.edit-product input[type="number"],
+.edit-product select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.create-product button,
+.edit-product button,
+.create-product .btn-guardar {
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.create-product button:hover,
+.edit-product button:hover,
+.create-product .btn-guardar:hover {
+  background-color: #0c63e4;
+}
+.edit-product .btn-cancelar {
+  background-color: #dc3545 !important;
+  color: #fff;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

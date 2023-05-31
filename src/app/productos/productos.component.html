@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="products-container">
-    <div class="table-responsive products-list">
+    <div class="table-responsive products-list" *ngIf="!selectedProducto">
       <h2>Listado de Productos</h2>
       <table class="table table-dark table-striped">
         <tr>
@@ -27,13 +27,60 @@
       </table>
     </div>
 
-    <div class="create-product">
+    <div class="create-product" *ngIf="!selectedProducto">
       <h2>Nuevo Producto</h2>
       <div class="form-group input-container">
         <label for="nombre">Nombre:</label>
         <input class="form-control form-control-sm rounded text-center" id="nombre" type="text" [(ngModel)]="nuevoProducto.nombre">
       </div>
+      <div class="form-group input-container">
+        <label for="precio">Precio:</label>
+        <input class="form-control form-control-sm rounded text-center" id="precio" type="text" [(ngModel)]="nuevoProducto.precio">
+      </div>
+      <div class="form-group input-container">
+        <label for="categoria">Categoría:</label>
+        <select class="form-control form-control-sm rounded text-center" id="categoria" [(ngModel)]="categoriaSeleccionada">
+          <option *ngFor="let categoria of categorias" [value]="categoria._id">{{categoria.nombre}}</option>
+        </select>
+      </div>
+      <div class="form-group input-container">
+        <label for="usuario">Usuario:</label>
+        <select class="form-control form-control-sm rounded text-center" id="usuario" [(ngModel)]="usuarioSeleccionado">
+          <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{usuario.nombre}}</option>
+        </select>
+      </div>
       <button class="btn btn-primary" (click)="createProducto(nuevoProducto)">Crear</button>
     </div>
+
+    <div class="edit-product" *ngIf="selectedProducto">
+      <h2>Editar Producto</h2>
+      <div class="form-group">
+        <label for="nombre-edit">Nombre:</label>
+        <input class="form-control" id="nombre-edit" type="text" [(ngModel)]="selectedProducto.nombre">
+      </div>
+      <div class="form-group">
+        <label for="precio-edit">Precio:</label>
+        <input class="form-control" id="precio-edit" type="text" [(ngModel)]="selectedProducto.precio">
+      </div>
+      <div class="form-group">
+        <label for="categoria-edit">Categoría:</label>
+        <select class="form-control" id="categoria-edit" [(ngModel)]="categoriaSeleccionada">
+          <option *ngFor="let categoria of categorias" [value]="categoria._id">{{categoria.nombre}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="usuario-edit">Usuario:</label>
+        <select class="form-control" id="usuario-edit" [(ngModel)]="usuarioSeleccionado">
+          <option *ngFor="let usuario of usuarios" [value]="usuario._id">{{usuario.nombre}}</option>
+        </select>
+      </div>
+      <div class="button-container">
+        <button class="btn btn-primary btn-guardar" (click)="updateProducto(selectedProducto)">Guardar</button>
+        <button class="btn btn-primary btn-cancelar" (click)="cancelEdit()">Cancelar</button>
+
+      </div>
+    </div>
+
+
   </div>
 </div>

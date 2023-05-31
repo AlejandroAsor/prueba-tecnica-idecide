@@ -8,6 +8,7 @@ import { AuthService } from '../core/services/auth.service';
   styleUrls: ['./productos.component.css']
 })
 export class ProductosComponent implements OnInit {
+
   productos: any[] = [];
   token: string = '';
   nuevoProducto = {
@@ -26,7 +27,8 @@ export class ProductosComponent implements OnInit {
   selectedProducto: any = null;
   categorias: any[] = [];
   usuarios: any[] = [];
-  categoriaSeleccionada: any = null; // Variable para almacenar la categoría seleccionada
+  categoriaSeleccionada: string = '';
+  usuarioSeleccionado: string = ''; // Variable para almacenar el ID del usuario seleccionado
 
   constructor(
     private apiService: ApiService,
@@ -36,7 +38,7 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
     this.token = this.authService.getToken();
     this.getProductos();
-    this.getCategories();
+    this.getCategories    ();
     this.getUsers();
   }
 
@@ -79,8 +81,8 @@ export class ProductosComponent implements OnInit {
   createProducto(producto: any): void {
     const nuevoProducto = {
       nombre: producto.nombre,
-      categoria: producto.categoria._id,
-      usuario: producto.usuario._id,
+      categoria: this.categoriaSeleccionada,
+      usuario: this.usuarioSeleccionado,
       precio: producto.precio
     };
 
@@ -112,29 +114,17 @@ export class ProductosComponent implements OnInit {
     );
   }
 
-
-
-
-
-
-
   updateProducto(producto: any): void {
     console.log('Producto a actualizar:', producto);
 
     const token = this.authService.getToken();
-    const categoriaId = producto.categoria._id; // Obtener el valor de la categoría _id
-
-    const categoria = this.categorias.find(c => c._id === categoriaId); // Buscar la categoría por su ID
-    if (!categoria) {
-      console.error('La categoría seleccionada no existe.');
-      return;
-    }
 
     const productoActualizado = {
       _id: producto._id, // Mantener el mismo ID del producto
       nombre: producto.nombre,
       precio: producto.precio,
-      categoria: categoriaId // Pasar solo el ID de la categoría
+      categoria: this.categoriaSeleccionada, // Pasar solo el ID de la categoría
+      usuario: this.usuarioSeleccionado, // Pasar solo el ID del usuario
     };
 
     console.log('Producto actualizado:', productoActualizado);
@@ -151,13 +141,6 @@ export class ProductosComponent implements OnInit {
     );
   }
 
-
-
-
-
-
-
-
   deleteProducto(productoId: string): void {
     const token = this.authService.getToken();
     this.apiService.deleteProduct(productoId, token).subscribe(
@@ -170,8 +153,15 @@ export class ProductosComponent implements OnInit {
       }
     );
   }
-
+  cancelEdit(): void {
+    this.selectedProducto = null;
+    this.categoriaSeleccionada = '';
+    this.usuarioSeleccionado = '';
+  }
   loadProducto(producto: any): void {
     this.selectedProducto = { ...producto };
+    this.categoriaSeleccionada = producto.categoria._id; // Actualizar el ID de la categoría seleccionada
+    this.usuarioSeleccionado = producto.usuario._id; // Actualizar el ID del usuario seleccionado
   }
 }
+
